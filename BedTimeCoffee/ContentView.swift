@@ -8,7 +8,7 @@ import CoreML
 import SwiftUI
 
 struct ContentView: View {
-    @State private var wakeUp = Date.now
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAMount = 1
     
@@ -16,30 +16,52 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var showingAlert = false
     
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date.now
+    }
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Quando você deseja acordar?")
-                    .font(.headline)
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.white, Color.blue, Color.indigo, Color.purple]),
+                               startPoint: .topLeading,
+                               endPoint: .bottom)
+                    .ignoresSafeArea()
                 
-                DatePicker("Insira um horário", selection: $wakeUp, displayedComponents:
-                        .hourAndMinute)
+                Form {
+                    Section {
+                        Text("Quando você deseja acordar?")
+                            .font(.headline)
+                        
+                        DatePicker("Insira um horário", selection: $wakeUp, displayedComponents:
+                                .hourAndMinute)
                         .labelsHidden()
-                
-                Text("Quantidade de sono")
-                    .font(.headline)
-                
-                Stepper("\(sleepAmount.formatted()) horas", value: $sleepAmount, in: 4...12, step: 0.25)
-                
-                Text("Quantidade diária de Café")
-                    .font(.headline)
-                
-                Stepper(coffeeAMount == 1 ? "1 copo" : "\(coffeeAMount) copos", value: $coffeeAMount, in: 1...20)
+                    }
+                    
+                    Section {
+                        Text("Quantidade de sono")
+                            .font(.headline)
+                        
+                        Stepper("\(sleepAmount.formatted()) horas", value: $sleepAmount, in: 4...12, step: 0.25)
+                    }
+                    
+                    Section {
+                        Text("Quantidade diária de Café")
+                            .font(.headline)
+                        
+                        Stepper(coffeeAMount == 1 ? "1 copo" : "\(coffeeAMount) copos", value: $coffeeAMount, in: 1...20)
+                    }
+                }
             }
-            
-            .navigationTitle("CoffeeRest")
+            .scrollContentBackground(.hidden)
+            .navigationTitle("BedTimeCoffee")
             .toolbar {
                 Button("Calcular", action: calculateBedTime)
+                    .foregroundColor(.black)
+                    .fontWeight(.semibold)
             }
             
             .alert(alertTitle, isPresented: $showingAlert) {
