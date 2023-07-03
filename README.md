@@ -23,8 +23,6 @@ What is truly captivating about machine learning is its versatility, as it can b
 - Error handling in Swift.
 - Basic debugging.
 
-#
-
 ![BedTimeCoffee Banner](./Documentation/bedtimecoffeeThumb.png)
 
 > This is a project made from The [100DaysOfSwiftUI](https://www.hackingwithswift.com/100/swiftui), check my portfolio at [andreporto.vercel.app](https://andreporto.vercel.app)
