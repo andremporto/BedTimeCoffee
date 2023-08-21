@@ -1,4 +1,4 @@
-# BedTimeCoffee
+![BedTimeCoffee](https://socialify.git.ci/andremporto/BedTimeCoffee/image?description=1&descriptionEditable=The%20better%20time%20to%20rest.&forks=1&issues=1&language=1&name=1&owner=1&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
 
 ## Our Goal
 
